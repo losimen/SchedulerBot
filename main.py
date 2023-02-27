@@ -5,7 +5,6 @@ from handlers import user_commands
 
 from database import db_loader
 
-
 user_commands.register_messages_client(dp)
 
 async def on_startup(dp: Dispatcher):

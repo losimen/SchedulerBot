@@ -8,7 +8,9 @@ async def init_db():
                         'user_id INTEGER PRIMARY KEY ,' +
                         'username TEXT NULLABLE,' +
                         'first_name TEXT NULLABLE,' +
-                        'subgroup INTEGER DEFAULT 1)' )
+                        'subgroup INTEGER DEFAULT 1,' +
+                        'is_notify INTEGER DEFAULT 1,'
+                        'is_admin INTEGER DEFAULT 0)')
     await db.commit()
 
     await db.execute('CREATE TABLE IF NOT EXISTS lesson (' +
