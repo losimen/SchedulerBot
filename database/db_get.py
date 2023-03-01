@@ -48,3 +48,28 @@ async def get_schedule_for_weekday(weekday: int):
                 schedule_result.append(lesson_result)
 
             return schedule_result
+
+
+async def get_all_users():
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute('SELECT * FROM user') as cursor:
+            users = await cursor.fetchall()
+
+            if users is None:
+                return None
+
+            users_result = []
+
+            for user in users:
+                user_result = {
+                    'user_id': user[0],
+                    'username': user[1],
+                    'first_name': user[2],
+                    'subgroup': user[3],
+                    'is_notify': user[4],
+                    'is_admin': user[5]
+                }
+
+                users_result.append(user_result)
+
+            return users_result

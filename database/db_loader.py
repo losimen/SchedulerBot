@@ -26,7 +26,7 @@ async def init_db():
                         'subgroup INTEGER NULLABLE,' +
                         'is_nominator INTEGER NULLABLE,' +
                         'teacher TEXT NULLABLE,' +
-                        'type TEXT NULLABLE,' +
+                        'type INTEGER NULLABLE,' +
                         'note TEXT NULLABLE,' +
                         'weekday INTEGER NULLABLE,'
                         'time TEXT NULLABLE)')
