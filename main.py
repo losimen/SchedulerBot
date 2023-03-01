@@ -1,11 +1,14 @@
 from aiogram import Dispatcher, executor
 from loader import dp, bot
 from config import ADMIN_ID
-from handlers import user_commands
 
 from database import db_loader
 
+from handlers import user_commands
+from FSM import Lesson
+
 user_commands.register_messages_client(dp)
+Lesson.register_lesson(dp)
 
 async def on_startup(dp: Dispatcher):
     await db_loader.init_db()

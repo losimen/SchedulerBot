@@ -25,8 +25,3 @@ async def main_menu(message: types.Message):
 
     await message.answer(text=msg_text,
                          reply_markup=keyboard_generator.main_menu(user_data))
-
-
-async def create_lesson(message: types.Message):
-    await message.answer(text='Введи назву предмету:')
-    await Lesson.waiting_for_lesson_name.set()
