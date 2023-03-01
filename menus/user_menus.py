@@ -1,10 +1,15 @@
 from aiogram import types
 import keyboards.keyboards_generator.user_keyboards as keyboard_generator
 
+from FSM import Lesson
+
 from database.db_insert import insert_user
 from database.db_get import get_user
 
 async def start_menu(message: types.Message):
+    if message.chat.type != 'private':
+        return
+
     user_data = await get_user(message.chat.id)
     if user_data is None:
         await insert_user(message.from_user.id, message.chat.id, message.from_user.first_name)
@@ -20,3 +25,8 @@ async def main_menu(message: types.Message):
 
     await message.answer(text=msg_text,
                          reply_markup=keyboard_generator.main_menu(user_data))
+
+
+async def create_lesson(message: types.Message):
+    await message.answer(text='Введи назву предмету:')
+    await Lesson.waiting_for_lesson_name.set()

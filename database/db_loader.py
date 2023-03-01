@@ -13,14 +13,22 @@ async def init_db():
                         'is_admin INTEGER DEFAULT 0)')
     await db.commit()
 
+
+    # lesson_name, lesson_link,
+    # lesson_subgroup, lesson_is_nominator,
+    # lesson_teacher, lesson_type,
+    # lesson_note, lesson_start
+
     await db.execute('CREATE TABLE IF NOT EXISTS lesson (' +
                         'id INTEGER PRIMARY KEY AUTOINCREMENT,' +
                         'name TEXT NULLABLE,' +
                         'link TEXT NULLABLE,' +
                         'subgroup INTEGER NULLABLE,' +
                         'is_nominator INTEGER NULLABLE,' +
-                        'start_time TEXT NULLABLE,'+
-                        'note TEXT NULLABLE)')
+                        'teacher TEXT NULLABLE,' +
+                        'type TEXT NULLABLE,' +
+                        'note TEXT NULLABLE,' +
+                        'time TEXT NULLABLE)')
     await db.commit()
 
     print('Database has been successfully connected')

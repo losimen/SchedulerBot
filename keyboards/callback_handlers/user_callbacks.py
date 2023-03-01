@@ -35,4 +35,3 @@ async def change_notifications(callback: types.CallbackQuery):
 
     await update_user_notifications(callback.message, is_notify)
     await user_menus.main_menu(callback.message)
-
