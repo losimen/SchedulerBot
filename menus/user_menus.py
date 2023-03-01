@@ -1,8 +1,6 @@
 from aiogram import types
 import keyboards.keyboards_generator.user_keyboards as keyboard_generator
 
-from FSM import Lesson
-
 from database.db_insert import insert_user
 from database.db_get import get_user
 

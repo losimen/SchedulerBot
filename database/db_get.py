@@ -19,3 +19,32 @@ async def get_user(user_id):
             }
 
             return user_result
+
+
+async def get_schedule_for_weekday(weekday: int):
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute('SELECT * FROM lesson WHERE weekday = ?', (weekday,)) as cursor:
+            schedule = await cursor.fetchall()
+
+            if schedule is None:
+                return None
+
+            schedule_result = []
+
+            for lesson in schedule:
+                lesson_result = {
+                    'id': lesson[0],
+                    'name': lesson[1],
+                    'link': lesson[2],
+                    'subgroup': lesson[3],
+                    'is_nominator': lesson[4],
+                    'teacher': lesson[5],
+                    'type': lesson[6],
+                    'note': lesson[7],
+                    'weekday': lesson[8],
+                    'time': lesson[9]
+                }
+
+                schedule_result.append(lesson_result)
+
+            return schedule_result

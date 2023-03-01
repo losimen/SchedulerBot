@@ -28,7 +28,7 @@ async def init_db():
                         'teacher TEXT NULLABLE,' +
                         'type TEXT NULLABLE,' +
                         'note TEXT NULLABLE,' +
-                        'week_day INTEGER NULLABLE,'
+                        'weekday INTEGER NULLABLE,'
                         'time TEXT NULLABLE)')
     await db.commit()
 

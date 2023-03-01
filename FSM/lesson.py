@@ -15,7 +15,7 @@ class FSMLesson(StatesGroup):
     save_lesson_is_nominator = State()
     save_lesson_teacher = State()
     save_lesson_type = State()
-    save_lesson_week_day = State()
+    save_lesson_weekday = State()
     save_lesson_time = State()
 
 
@@ -84,13 +84,13 @@ async def fsm_lesson_type(message: types.Message, state: FSMContext):
     await FSMLesson.next()
 
 
-async def fsm_lesson_week_day(message: types.Message, state: FSMContext):
+async def fsm_lesson_weekday(message: types.Message, state: FSMContext):
     weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд']
     if message.text not in weekdays:
         await message.answer('Введіть відповідний тиждень!')
         return
 
-    await state.update_data(week_day=weekdays.index(message.text))
+    await state.update_data(weekday=weekdays.index(message.text))
     await message.answer('Введіть час (приклад 14:00):')
     await FSMLesson.next()
 
@@ -117,5 +117,5 @@ def register_lesson(dp: Dispatcher):
     dp.register_message_handler(fsm_lesson_is_nominator, state=FSMLesson.save_lesson_is_nominator)
     dp.register_message_handler(fsm_lesson_teacher, state=FSMLesson.save_lesson_teacher)
     dp.register_message_handler(fsm_lesson_type, state=FSMLesson.save_lesson_type)
-    dp.register_message_handler(fsm_lesson_week_day, state=FSMLesson.save_lesson_week_day)
+    dp.register_message_handler(fsm_lesson_weekday, state=FSMLesson.save_lesson_weekday)
     dp.register_message_handler(fsm_lesson_time, state=FSMLesson.save_lesson_time)
